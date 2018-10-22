@@ -1,0 +1,24 @@
+{
+  "name": "node-pg-orm",
+  "version": "1.0.0",
+  "description": "Mini node<->postgres ORM",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lealhugui/node-pg-orm.git"
+  },
+  "keywords": [],
+  "author": "Guilherme Leal <lealhugui@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lealhugui/node-pg-orm/issues"
+  },
+  "homepage": "https://github.com/lealhugui/node-pg-orm#readme",
+  "dependencies": {
+    "pg": "^7.5.0"
+  },
+  "engines" : { "node" : ">=8.9" }
+}
