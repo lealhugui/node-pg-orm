@@ -18,7 +18,10 @@
   },
   "homepage": "https://github.com/lealhugui/node-pg-orm#readme",
   "dependencies": {
-    "pg": "^7.5.0"
+    "pg": "^7.5.0",
+    "winston": "^3.1.0"
   },
-  "engines" : { "node" : ">=8.9" }
+  "engines": {
+    "node": ">=8.9"
+  }
 }
