@@ -159,6 +159,20 @@ export class AbstractModel {
         }
     }
 
+    static getOne(conn, sql, params=null, shouldHidrate=false) {
+        const rows = conn.query(sql, params)
+        if(rows && shouldHidrate) {
+            const result = rows.map((r) => {
+                const mdl = new this();
+                mdl.hidrate(r);
+                return mdl
+            });
+            return result
+        } else {
+            return rows;
+        }
+    }
+
     static getList(conn, sql, params=null, shouldHidrate=false) {
         const rows = conn.query(sql, params)
         if(rows && shouldHidrate) {
