@@ -2,9 +2,10 @@
   "name": "node-pg-orm",
   "version": "1.0.0",
   "description": "Mini node<->postgres ORM",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run build && node test.js",
+    "build": "babel src --out-dir lib"
   },
   "repository": {
     "type": "git",
@@ -18,10 +19,18 @@
   },
   "homepage": "https://github.com/lealhugui/node-pg-orm#readme",
   "dependencies": {
-    "pg": "^7.5.0",
-    "winston": "^3.1.0"
+    "@babel/polyfill": "^7.0.0",
+    "debug": "^4.1.0",
+    "lodash": "^4.17.11",
+    "moment": "^2.22.2",
+    "pg": "^7.5.0"
   },
   "engines": {
     "node": ">=8.9"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0"
   }
 }
