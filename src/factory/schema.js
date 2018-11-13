@@ -2,7 +2,7 @@
 import * as _ from 'lodash';
 import { Pool } from 'pg';
 
-export default class PgModelSchema {
+export class PgModelSchema {
     constructor(options={}) {
         this._dbOptions = options;
         this._modelSet = null;
@@ -14,7 +14,7 @@ export default class PgModelSchema {
         if(!this._modelSet) {
             this._modelSet = new ModelSet();
         }
-        return this._modelSet.cls;
+        return this._modelSet;
     }
 
     _validateConnSettings(settings=null) {
