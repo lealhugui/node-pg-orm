@@ -1,6 +1,6 @@
 {
   "name": "node-pg-orm",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Mini node<->postgres ORM",
   "main": "lib/index.js",
   "scripts": {
