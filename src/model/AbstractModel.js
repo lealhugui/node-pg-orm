@@ -151,7 +151,10 @@ export class AbstractModel {
         )
     }
 
-    hidrate(dataValues) {
+    hidrate(dataValues, conn=null) {
+        if(conn) {
+            this._connOperator = conn;
+        }
         for(const f of this.fields) {
             f.setValue(
                 _.get(dataValues, f.colName, null)
@@ -163,7 +166,7 @@ export class AbstractModel {
         const rows = conn.query(sql, params)
         if(rows && shouldHidrate) {
             const result = rows.map((r) => {
-                const mdl = new this();
+                const mdl = new this(conn);
                 mdl.hidrate(r);
                 return mdl
             });
@@ -177,7 +180,7 @@ export class AbstractModel {
         const rows = conn.query(sql, params)
         if(rows && shouldHidrate) {
             const result = rows.map((r) => {
-                const mdl = new this();
+                const mdl = new this(conn);
                 mdl.hidrate(r);
                 return mdl
             });
