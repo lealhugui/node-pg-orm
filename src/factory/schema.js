@@ -23,17 +23,17 @@ export class PgModelSchema {
             
             const result = [];
 
-            if(!_.get(toValidate, 'server', null)) {
-                result.append('Server');
+            if(!_.get(toValidate, 'host', null)) {
+                result.push('Host');
             }
             if(!_.get(toValidate, 'database', null)) {
-                result.append('Database');
+                result.push('Database');
             }
             if(!_.get(toValidate, 'user', null)) {
-                result.append('User');
+                result.push('User');
             }
             if(!_.get(toValidate, 'pass', null)) {
-                result.append('Pass');
+                result.push('Pass');
             }
 
             if(result.length > 0) {
