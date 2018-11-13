@@ -1,6 +1,7 @@
 
 import * as _ from 'lodash';
 import { Pool } from 'pg';
+import { AbstractModel } from '../model';
 
 export class PgModelSchema {
     constructor(options={}) {
@@ -72,18 +73,24 @@ class ModelSet {
 
     import(path, attrInModule=null) {
         const mdl = require(path);
+        let modelCandidate = null;
         let mdlName = null; 
         if (attrInModule) {
             mdlName = attrInModule;
-            this._classes[mdlName] = mdl[attrInModule];
+            modelCandidate = mdl[attrInModule];
         } else {
             const pathSplited = path.split('/');
             mdlName = pathSplited[pathSplited.length-1];
             mdlName = mdlName.replace('.js', '');
             mdlName = mdlName.replace('.ts', '');
-            this._classes[mdlName] = mdl;
+            modelCandidate = mdl;
         }
+        if(modelCandidate && (modelCandidate.prototype instanceof AbstractModel)) {            
 
+            this._classes[mdlName] = modelCandidate;
+        } else {
+            throw new Error("Module does not contain a model");
+        }
         return this._classes[mdlName];
     }
 
