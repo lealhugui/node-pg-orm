@@ -62,6 +62,7 @@ export class PgModelSchema {
         if(!this._pg) {
             this._pg = new Pool(this._dbOptions);
         }
+        return this._pg;
     }
 
 }
