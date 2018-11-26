@@ -24,7 +24,7 @@ export class DateField extends AbstractField {
     _beforeSetHook(v) {
         if(v) {
             if (!moment(v).isValid()) {
-                throw new ValueError()
+                throw new ValueError(`Err: ${this.colName}`)
             }
         }
         return v;

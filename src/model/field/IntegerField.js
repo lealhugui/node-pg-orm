@@ -23,7 +23,7 @@ export class IntegerField extends AbstractField {
     _beforeSetHook(v) {
         console.log(v)
         if (typeof(v) !== 'number') {
-            throw new ValueError()
+            throw new ValueError(`Err: ${this.colName}`)
         }
         return v;
     }

@@ -22,7 +22,7 @@ export class BooleanField extends AbstractField {
     }
     _beforeSetHook(v) {
         if (typeof(v) !== 'boolean') {
-            throw new ValueError()
+            throw new ValueError(`Err: ${this.colName}`)
         }
         return v;
     }

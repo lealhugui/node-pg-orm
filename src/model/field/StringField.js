@@ -28,7 +28,7 @@ export class StringField extends AbstractField {
     _beforeSetHook(v) {
         
         if (typeof(v) !== 'string') {
-            throw new ValueError()
+            throw new ValueError(`Err: ${this.colName}`)
         }
         return v.toString()
     }
