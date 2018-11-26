@@ -3,10 +3,10 @@ import { ValueError } from '../../errors'
 import { AbstractField } from './AbstractField'
 
 export class BooleanField extends AbstractField {
-    
+
     /**
-     * 
-     * @param {colName:string, typeOptions?: Object} options 
+     *
+     * @param {colName:string, typeOptions?: Object} options
      */
     constructor(colName, options={}) {
         super()
@@ -21,10 +21,12 @@ export class BooleanField extends AbstractField {
         ));
     }
     _beforeSetHook(v) {
+      if(v) {
         if (typeof(v) !== 'boolean') {
             throw new ValueError(`Err: ${this.colName}`)
         }
-        return v;
+      }
+      return v;
     }
 
 }

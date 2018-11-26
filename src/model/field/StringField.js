@@ -26,11 +26,14 @@ export class StringField extends AbstractField {
         return super.getValue().toString()
     }
     _beforeSetHook(v) {
-        
-        if (typeof(v) !== 'string') {
-            throw new ValueError(`Err: ${this.colName}`)
+        if (v) {
+            if (typeof(v) !== 'string') {
+                throw new ValueError(`Err: ${this.colName}`)
+            }
+            return v.toString()
+        } else {
+            return v;
         }
-        return v.toString()
     }
 
 }

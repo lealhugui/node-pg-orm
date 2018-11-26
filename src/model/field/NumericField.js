@@ -21,8 +21,10 @@ export class NumericField extends AbstractField {
         ));
     }
     _beforeSetHook(v) {
-        if (typeof(v) !== 'number') {
-            throw new ValueError(`Err: ${this.colName}`)
+        if(v) {
+            if (typeof(v) !== 'number') {
+                throw new ValueError(`Err: ${this.colName}`)
+            }
         }
         return v;
     }
