@@ -1,6 +1,6 @@
 'use strict';
 import { ValueError } from '../../errors'
-import * as moment from 'moment'
+import moment from 'moment'
 import { AbstractField } from './AbstractField'
 
 export class DateField extends AbstractField {
@@ -19,11 +19,13 @@ export class DateField extends AbstractField {
         }
         this._init(Object.assign(
             {colName: colName, colType: 'date'}, options
-        ));
+        ));        
     }
     _beforeSetHook(v) {
-        if (!moment(v).isValid()) {
-            throw new ValueError()
+        if(v) {
+            if (!moment(v).isValid()) {
+                throw new ValueError()
+            }
         }
         return v;
     }

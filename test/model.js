@@ -24,7 +24,8 @@ class MyModel extends AbstractModel {
     }
     def() {
         this.id = new IntegerField('id', {isPk: true})
-        this.str = new StringField('str')
+        this.str = new StringField('str');
+        this.dt = new DateField('dt');
     }
     
 }
@@ -40,6 +41,8 @@ module.exports = function() {
     } catch(err) {
         console.log('str.asNum', false)
     }
+
+    mdl.dt.setValue(new Date());
     
     otherMdlInstance = MyModel.getByPk(new ProxyConn(), {id: 1});
     otherMdlInstance.resertConnClient(new ProxyConn())
