@@ -14,7 +14,10 @@ const {
 class ProxyConn {
     query(sql, params) {
         console.log('sql: ', sql, params);
-        return [{id: 1, str: 'FooBarBaz'}]
+        return {
+            rows: [{id: 1, str: 'FooBarBaz'}],
+            rowCount: 1
+        }
     }
 }
 
@@ -44,9 +47,11 @@ module.exports = function() {
 
     mdl.dt.setValue(new Date());
     
-    otherMdlInstance = MyModel.getByPk(new ProxyConn(), {id: 1});
-    otherMdlInstance.resertConnClient(new ProxyConn())
-    otherMdlInstance.save();
-    otherMdlInstance.create();
+    MyModel.getByPk(new ProxyConn(), {id: 1}).then(otherMdlInstance => {
+        otherMdlInstance.resetConnClient(new ProxyConn())
+        otherMdlInstance.save();
+        otherMdlInstance.create();
+    }).catch(err => console.error(err));
+    
 }
 

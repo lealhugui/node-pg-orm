@@ -11,7 +11,7 @@ export class AbstractModel {
     this.def();
   }
   
-  resertConnClient(cli) {
+  resetConnClient(cli) {
     this._connOperator = cli;
   }
   
@@ -224,7 +224,6 @@ export class AbstractModel {
     const sql =
       `select * from ${this.tableName()} where ${whereArr.join(' AND ')} LIMIT 1`
     const resultSet = await conn.query(sql, params)
-    
     if(resultSet.rowCount > 0) {
       const result = new this(conn)
       result.hidrate(resultSet.rows[0])
