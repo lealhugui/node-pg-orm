@@ -20,7 +20,7 @@ export class AbstractModel {
     throw new NotImplementedError();
   }
   
-  static tableName() {
+  static tableName(): string {
     throw new NotImplementedError();
   }
   
@@ -108,11 +108,11 @@ export class AbstractModel {
       fieldsThatUpdate,
       fieldsWhere,
       values
-    } = this._parseSqlOpt();
-    
+    } = this._parseSqlOpt()
+    const tb = (<typeof AbstractModel> this.constructor).tableName()
     const sql =
-    `update ${this.class.tableName()} set ${fieldsThatUpdate.join(', ')} ` +
-    ` where ${fieldsWhere.join(' AND ')} returning * ;`;
+    `update ${tb} set ${fieldsThatUpdate.join(', ')} ` +
+    ` where ${fieldsWhere.join(' AND ')} returning * ;`
     
     return {
       sql: sql,
@@ -131,10 +131,9 @@ export class AbstractModel {
       
       interpolations.push(`$${Number(f)+1}`)
     }
-    console.log(fieldNames)
-    console.log(interpolations)
+    const tb = (<typeof AbstractModel> this.constructor).tableName()
     const sql =
-    `insert into ${this.class.tableName()} (${fieldNames.join(', ')}) ` +
+    `insert into ${tb} (${fieldNames.join(', ')}) ` +
     ` values(${interpolations.join(', ')}) returning * ;`;
     
     return {
@@ -222,6 +221,7 @@ export class AbstractModel {
       params.push(wherePkObj[prop])
       i++
     }
+    
     const sql =
       `select * from ${this.tableName()} where ${whereArr.join(' AND ')} LIMIT 1`
     const resultSet = await conn.query(sql, params)
