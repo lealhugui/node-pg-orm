@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "npm run build && node test/index.js",
-    "build": "babel src --out-dir lib"
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/lealhugui/node-pg-orm#readme",
   "dependencies": {
-    "@babel/polyfill": "^7.0.0",
+    "@types/debug": "0.0.31",
+    "@types/lodash": "^4.14.118",
+    "@types/pg": "^7.4.11",
     "debug": "^4.1.0",
     "lodash": "^4.17.11",
     "moment": "^2.22.2",
@@ -29,8 +31,6 @@
     "node": ">=8.9"
   },
   "devDependencies": {
-    "@babel/cli": "^7.1.2",
-    "@babel/core": "^7.1.2",
-    "@babel/preset-env": "^7.1.0"
+    "typescript": "^3.1.6"
   }
 }

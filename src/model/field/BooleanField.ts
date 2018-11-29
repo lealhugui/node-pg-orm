@@ -1,4 +1,3 @@
-'use strict';
 import { ValueError } from '../../errors'
 import { AbstractField } from './AbstractField'
 
@@ -8,7 +7,7 @@ export class BooleanField extends AbstractField {
      *
      * @param {colName:string, typeOptions?: Object} options
      */
-    constructor(colName, options={}) {
+    constructor(colName: string, options: any={}) {
         super()
         if(Object.hasOwnProperty('colType')){
             delete options.colType;
@@ -20,7 +19,7 @@ export class BooleanField extends AbstractField {
             {colName: colName, colType: 'boolean'}, options
         ));
     }
-    _beforeSetHook(v) {
+    _beforeSetHook(v: any) {
       if(v) {
         if (typeof(v) !== 'boolean') {
             throw new ValueError(`Err: ${this.colName}`)

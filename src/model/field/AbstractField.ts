@@ -1,9 +1,12 @@
-'use strict'
 import * as _ from 'lodash'
-import { debug, debugFields } from '../../util'
+import { debugFields } from '../../util'
 import { ValueError } from '../../errors'
 
 export class AbstractField {
+
+    _column: any;
+    _val: any;
+
 
     /**
      * 
@@ -16,7 +19,7 @@ export class AbstractField {
         this._init(options)
     }
 
-    _init(options) {
+    _init(options: any) {
         if(!options.hasOwnProperty('colName')) {
             throw new ValueError('Invalid Column Name')
         }
@@ -34,7 +37,7 @@ export class AbstractField {
         debugFields(this._column);
     }
 
-    _setColType(colType, options={}) {
+    _setColType(colType: any, options={}) {
         this._column.type = colType;
         this._column.typeOptions = options
     }
@@ -56,13 +59,13 @@ export class AbstractField {
         return this._val
     }
     
-    _beforeSetHook(v) { return v }
-    setValue(v) {
+    _beforeSetHook(v: any) { return v }
+    setValue(v: any) {
         v = this._beforeSetHook(v)
         this._val = v
         this._afterSetHook(this._val)
     }
-    _afterSetHook(v) { }
+    _afterSetHook(v: any) { }
 
     
 }

@@ -8,7 +8,7 @@ export class NumericField extends AbstractField {
      * 
      * @param {colName:string, typeOptions?: Object} options 
      */
-    constructor(colName, options={}) {
+    constructor(colName: string, options: any={}) {
         super()
         if(Object.hasOwnProperty('colType')){
             delete options.colType;
@@ -20,7 +20,7 @@ export class NumericField extends AbstractField {
             {colName: colName, colType: 'int'}, options
         ));
     }
-    _beforeSetHook(v) {
+    _beforeSetHook(v: any) {
         if(v) {
             if (typeof(v) !== 'number') {
                 throw new ValueError(`Err: ${this.colName}`)

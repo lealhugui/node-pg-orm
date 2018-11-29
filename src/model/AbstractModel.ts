@@ -1,17 +1,18 @@
-'use strict'
 import * as _ from 'lodash'
-import { NotImplementedError } from '../errors';
+import { NotImplementedError, ValueError } from '../errors';
 import  * as dbFields from './field';
-import { ValueError } from '../../lib/errors';
+
 
 export class AbstractModel {
-  
+  _connOperator: any
+  [key: string]: any
+
   constructor(connClient = null) {
     this._connOperator = connClient;
     this.def();
   }
   
-  resetConnClient(cli) {
+  resetConnClient(cli: any) {
     this._connOperator = cli;
   }
   
@@ -52,7 +53,7 @@ export class AbstractModel {
   }
   
   dataValues() {
-    const result = {}
+    const result: any = {}
     for(const f of this.fields) {
       result[f.colName] = f.getValue()
     }
@@ -110,7 +111,7 @@ export class AbstractModel {
     } = this._parseSqlOpt();
     
     const sql =
-    `update ${this.constructor.tableName()} set ${fieldsThatUpdate.join(', ')} ` +
+    `update ${this.class.tableName()} set ${fieldsThatUpdate.join(', ')} ` +
     ` where ${fieldsWhere.join(' AND ')} returning * ;`;
     
     return {
@@ -133,7 +134,7 @@ export class AbstractModel {
     console.log(fieldNames)
     console.log(interpolations)
     const sql =
-    `insert into ${this.constructor.tableName()} (${fieldNames.join(', ')}) ` +
+    `insert into ${this.class.tableName()} (${fieldNames.join(', ')}) ` +
     ` values(${interpolations.join(', ')}) returning * ;`;
     
     return {
@@ -164,7 +165,7 @@ export class AbstractModel {
     )
   }
       
-  hidrate(dataValues, conn=null) {
+  hidrate(dataValues: any, conn=null) {
     if(conn) {
       this._connOperator = conn;
     }
@@ -175,7 +176,7 @@ export class AbstractModel {
     }
   }
         
-  static async getOne(conn, sql, params=null, shouldHidrate=false) {
+  static async getOne(conn: any, sql: string, params=null, shouldHidrate=false) {
     const resultSet = await conn.query(sql, params)
     if(resultSet.rowCount > 0) {
       if(shouldHidrate) {
@@ -190,18 +191,18 @@ export class AbstractModel {
     }
   }
         
-  static async getList(conn, sql, params=null, shouldHidrate=false) {
+  static async getList(conn: any, sql: string, params=null, shouldHidrate=false) {
     const resultSet = await conn.query(sql, params)
     if(resultSet.rowCount > 0) {
       if(shouldHidrate) {
-        const result = resultSet.rows.map((r) => {
+        const result = resultSet.rows.map((r: any) => {
           const mdl = new this(conn)
           mdl.hidrate(r)
           return mdl
         });
         return result
       } else {
-        return rows;
+        return resultSet.rows;
       }
       
     } else {
@@ -209,7 +210,7 @@ export class AbstractModel {
     }
   }
         
-  static async getByPk(conn, wherePkObj) {
+  static async getByPk(conn: any, wherePkObj: any) {
     if(_.isEmpty(wherePkObj)) {
       throw new ValueError()
     }

@@ -4,9 +4,13 @@ import { Pool } from 'pg';
 import { AbstractModel } from '../model';
 
 export class PgModelSchema {
+    _dbOptions: any
+    _pg?: Pool | null
+    _modelSet?: ModelSet | null
+
     constructor(options={}) {
-        this._dbOptions = options;
-        this._modelSet = null;
+        this._dbOptions = options
+        this._modelSet = null
 
         this._validateConnSettings();
     }
@@ -49,7 +53,7 @@ export class PgModelSchema {
 
     set dbOpt(obj) {
         if(this.conn) {
-            throw new Exception('Conn already initialized');
+            throw new Error('Conn already initialized');
         }
         
         this._dbOptions = {
@@ -68,11 +72,12 @@ export class PgModelSchema {
 }
 
 class ModelSet {
+    _classes: any
     constructor() {
         this._classes = {}
     }
 
-    import(path, attrInModule=null) {
+    import(path: string, attrInModule: any=null) {
         const mdl = require(path);
         let modelCandidate = null;
         let mdlName = null; 

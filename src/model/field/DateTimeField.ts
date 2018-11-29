@@ -1,6 +1,5 @@
-'use strict';
 import { ValueError } from '../../errors'
-import moment from 'moment'
+import * as moment from 'moment'
 import { AbstractField } from './AbstractField'
 
 export class DateTimeField extends AbstractField {
@@ -9,7 +8,7 @@ export class DateTimeField extends AbstractField {
      * 
      * @param {colName:string, typeOptions?: Object} options 
      */
-    constructor(colName, options={}) {
+    constructor(colName: string, options: any={}) {
         super()
         if(Object.hasOwnProperty('colType')){
             delete options.colType;
@@ -21,7 +20,7 @@ export class DateTimeField extends AbstractField {
             {colName: colName, colType: 'dateTime'}, options
         ));
     }
-    _beforeSetHook(v) {
+    _beforeSetHook(v: any) {
         if(v) {
             if (!moment(v).isValid()) {
                 throw new ValueError(`Err: ${this.colName}`)
