@@ -175,7 +175,7 @@ export class AbstractModel {
     }
   }
         
-  async static getOne(conn, sql, params=null, shouldHidrate=false) {
+  static async getOne(conn, sql, params=null, shouldHidrate=false) {
     const resultSet = await conn.query(sql, params)
     if(resultSet.rowCount > 0) {
       if(shouldHidrate) {
@@ -190,7 +190,7 @@ export class AbstractModel {
     }
   }
         
-  async static getList(conn, sql, params=null, shouldHidrate=false) {
+  static async getList(conn, sql, params=null, shouldHidrate=false) {
     const resultSet = await conn.query(sql, params)
     if(resultSet.rowCount > 0) {
       if(shouldHidrate) {
@@ -209,7 +209,7 @@ export class AbstractModel {
     }
   }
         
-  async static getByPk(conn, wherePkObj) {
+  static async getByPk(conn, wherePkObj) {
     if(_.isEmpty(wherePkObj)) {
       throw new ValueError()
     }
