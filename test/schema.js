@@ -7,6 +7,5 @@ module.exports = function() {
     });
 
     foobar.models.import(path.join(__dirname, 'MyModel.js'));
-    console.log(foobar.models.cls);
-
+    console.log('--->', foobar.models.cls);
 }

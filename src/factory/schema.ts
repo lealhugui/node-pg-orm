@@ -1,4 +1,4 @@
-
+import {sep as pathSep} from 'path'
 import * as _ from 'lodash';
 import { Pool } from 'pg';
 import { AbstractModel } from '../model';
@@ -85,7 +85,7 @@ class ModelSet {
             mdlName = attrInModule;
             modelCandidate = mdl[attrInModule];
         } else {
-            const pathSplited = path.split('/');
+            const pathSplited = path.split(pathSep);
             mdlName = pathSplited[pathSplited.length-1];
             mdlName = mdlName.replace('.js', '');
             mdlName = mdlName.replace('.ts', '');
