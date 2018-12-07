@@ -5,6 +5,7 @@ export * from "./DateField";
 export * from "./BooleanField";
 export * from "./DateTimeField";
 export * from "./IntegerField";
+export * from "./SerialField";
 export * from "./NumericField";
 export * from "./StringField";
 /*

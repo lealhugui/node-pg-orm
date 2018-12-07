@@ -73,17 +73,21 @@ export class AbstractModel {
     
     if(ignoreWhere) {
       for(const fld of this.fields) {
-        fieldsThatUpdate.push(`${fld.colName} = $${i}`)
-        fieldNames.push(fld.colName)
-        values.push(fld.getValue())
-        i++
+        if(!fld.ignoreIfNull) {
+          fieldsThatUpdate.push(`${fld.colName} = $${i}`)
+          fieldNames.push(fld.colName)
+          values.push(fld.getValue())
+          i++
+        }
       }
     } else {
       
       for(const fld of this.notPk) {
-        fieldsThatUpdate.push(`${fld.colName} = $${i}`)
-        values.push(fld.getValue())
-        i++
+        if(!fld.ignoreIfNull) {
+          fieldsThatUpdate.push(`${fld.colName} = $${i}`)
+          values.push(fld.getValue())
+          i++
+        }
       }
       
       for(const fld of this.pk) {

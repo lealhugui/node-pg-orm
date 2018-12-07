@@ -33,6 +33,8 @@ export class AbstractField {
 
         this._column.isPk = _.get(options, 'isPk', false);
 
+        this._column.ignoreIfNull = _.get(options, 'ignoreIfNull', false);
+
         this._setColType(options.colType, options.typeOptions)
         debugFields(this._column);
     }
@@ -53,6 +55,10 @@ export class AbstractField {
     }
     get isPk() {
         return _.get(this._column, 'isPk', false);
+    }
+
+    get ignoreIfNull() {
+        return _.get(this._column, 'ignoreIfNull', false);
     }
     
     getValue() {

@@ -6,6 +6,7 @@ const {
     DateField,
     BooleanField,
     DateTimeField,
+    SerialField,
     IntegerField,
     NumericField,
     StringField
@@ -26,7 +27,8 @@ class MyModel extends AbstractModel {
         return 'tchumba'
     }
     def() {
-        this.id = new IntegerField('id', {isPk: true})
+        this.id = new SerialField('id', {isPk: true})
+        this.idOld = new IntegerField('idOld', {isPk: true})
         this.str = new StringField('str');
         this.dt = new DateField('dt');
     }
